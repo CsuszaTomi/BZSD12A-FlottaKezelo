@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BZSD12A.Models;
+using BZSD12A.Services;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +29,27 @@ namespace Classic.Windows
 
         private void btnBejelentkezes_Click(object sender, RoutedEventArgs e)
         {
-            if (txbUserName.Text == "a" && pwbPassword.Password == "a")
+            //if (txbUserName.Text == "a" && pwbPassword.Password == "a")
+            //{
+            //    Menu menu = new Menu();
+            //    menu.Show();
+            //    this.Close();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Hibás felhasználónév vagy jelszó!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
+            if (string.IsNullOrWhiteSpace(txbUserName.Text) || string.IsNullOrWhiteSpace(pwbPassword.Password))
+            {
+                MessageBox.Show("Kérem, töltse ki az összes mezőt!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            DatabaseService db = new DatabaseService();
+            MySqlConnection conn = db.CreateConnection();
+            UserServices userServices = new UserServices(conn);
+            List<User> users = userServices.GetUsers();
+            User user = users.FirstOrDefault(user => user.Name == txbUserName.Text && user.Password == pwbPassword.Password);
+            if (user != null && user.Role == "admin")
             {
                 Menu menu = new Menu();
                 menu.Show();
