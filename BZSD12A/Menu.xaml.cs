@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Classic.Windows;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -17,6 +18,7 @@ namespace Classic
         public Menu()
         {
             InitializeComponent();
+            bejelentkezve = true;
         }
 
         private void Exit(object sender, EventArgs e)
@@ -28,9 +30,13 @@ namespace Classic
             }
         }
 
-        private void FelhasznalokKarbantartasa(object sender, RoutedEventArgs e)
+        private void AutokCRUD(object sender, RoutedEventArgs e)
         {
-            Windows.Felhasznalok felhasznalok = new Windows.Felhasznalok();
+        }
+
+        private void UsersCrud(object sender, RoutedEventArgs e)
+        {
+            Felhasznalok felhasznalok = new Felhasznalok();
             felhasznalok.Show();
         }
     }

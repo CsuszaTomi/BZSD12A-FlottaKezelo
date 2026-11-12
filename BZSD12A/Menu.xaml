@@ -24,8 +24,11 @@
                     </MenuItem>
                     <MenuItem Header="_Kilépés" Click="Exit" Style="{StaticResource MaterialDesignMenuItem}"/>
                 </MenuItem>
-                <MenuItem Header="_Adatkarbantartás">
-                    <MenuItem Header="Felhasználók adatai" Click="FelhasznalokKarbantartasa"/>
+                <MenuItem Header="_Autók Kezelése">
+                    <MenuItem Header="Autók adatai" Click="AutokCRUD"/>
+                </MenuItem>
+                <MenuItem Header="_Alkamazottak kezelése">
+                    <MenuItem Header="_Alkamazottak adatai" Click="UsersCrud"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
