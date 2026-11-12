@@ -49,7 +49,7 @@ namespace Classic.Windows
             UserServices userServices = new UserServices(conn);
             List<User> users = userServices.GetUsers();
             User user = users.FirstOrDefault(user => user.Name == txbUserName.Text && user.Password == pwbPassword.Password);
-            if (new UserServices(conn).Login(user.Name,user.Password) && user.Role == "admin")
+            if (user != null && new UserServices(conn).Login(user.Name,user.Password) && user.Role == "admin")
             {
                 Menu menu = new Menu();
                 menu.Show();
