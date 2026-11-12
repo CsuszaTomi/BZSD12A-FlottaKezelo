@@ -48,8 +48,8 @@ namespace Classic.Windows
             MySqlConnection conn = db.CreateConnection();
             UserServices userServices = new UserServices(conn);
             List<User> users = userServices.GetUsers();
-            User user = users.FirstOrDefault(user => user.Name == txbUserName.Text && user.Password == pwbPassword.Password);
-            if (user != null && new UserServices(conn).Login(user.Name,user.Password) && user.Role == "admin")
+            User user = users.FirstOrDefault(u => u.Name == txbUserName.Text.Trim());
+            if (user != null && userServices.Login(user.Name, pwbPassword.Password) && user.Role == "admin")
             {
                 Menu menu = new Menu();
                 menu.Show();
