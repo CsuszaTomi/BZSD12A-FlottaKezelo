@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Classic.Windows"
         mc:Ignorable="d"
+        Background="AliceBlue"
         Title="Login" Height="450" Width="800">
     <Grid>
-        <Label Content="Felhasználónév:" HorizontalAlignment="Left" Margin="252,120,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txbUserName" HorizontalAlignment="Left" Margin="252,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Jelszó:" HorizontalAlignment="Left" Margin="252,0,0,0" VerticalAlignment="Center"/>
-        <PasswordBox x:Name="pwbPassword" HorizontalAlignment="Left" Margin="252,29,0,0" VerticalAlignment="Center" Width="120"/>
-        <Button x:Name="btnBejelentkezes" Content="Bejelentkezés" HorizontalAlignment="Left" Margin="372,338,0,0" VerticalAlignment="Top" Click="btnBejelentkezes_Click"/>
-
-
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Felhasználónév:" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="20" FontWeight="Bold"/>
+            <TextBox x:Name="txbUserName" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" FontSize="20"/>
+            <Label Content="Jelszó:" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+            <PasswordBox x:Name="pwbPassword" VerticalAlignment="Center" Width="200" FontSize="20"/>
+            <Button x:Name="btnBejelentkezes" Content="Bejelentkezés" Margin="5" Height="50"  VerticalAlignment="Top"  Click="btnBejelentkezes_Click" Background="#FF22D8C3" BorderBrush="#FF2830B7"/>
+        </StackPanel>
     </Grid>
 </Window>
