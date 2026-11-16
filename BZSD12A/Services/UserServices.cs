@@ -82,6 +82,57 @@ namespace BZSD12A.Services
                 if (_conn.State == ConnectionState.Open) _conn.Close();
             }
         }
+
+        public bool ModifyUser(User modifiedUser)
+        {
+            try
+            {
+                string sql = @"UPDATE user SET Name = @Name, Age = @Age, Role = @Role, 
+                               IdentityCardNum = @IdCard, Password = @Password WHERE ID = @Id";
+                MySqlCommand cmd = new MySqlCommand(sql, _conn);
+                cmd.Parameters.AddWithValue("@Name", modifiedUser.Name);
+                cmd.Parameters.AddWithValue("@Age", modifiedUser.Age);
+                cmd.Parameters.AddWithValue("@Role", modifiedUser.Role);
+                cmd.Parameters.AddWithValue("@IdCard", modifiedUser.IdentityCardNumber);
+                cmd.Parameters.AddWithValue("@Password", PasswordEncrypter.HashPassword(modifiedUser.Password));
+                cmd.Parameters.AddWithValue("@Id", modifiedUser.Id);
+                if (_conn.State != ConnectionState.Open) _conn.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            finally
+            {
+                if (_conn.State == ConnectionState.Open) _conn.Close();
+            }
+        }
+
+        public bool DeleteUser(int userId)
+        {
+            try
+            {
+                string sql = "DELETE FROM user WHERE ID = @Id";
+                MySqlCommand cmd = new MySqlCommand(sql, _conn);
+                cmd.Parameters.AddWithValue("@Id", userId);
+                if (_conn.State != ConnectionState.Open) _conn.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            finally
+            {
+                if (_conn.State == ConnectionState.Open) _conn.Close();
+            }
+        }
+
         public bool Login(string username, string rawPassword)
         {
             try

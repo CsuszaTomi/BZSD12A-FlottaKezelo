@@ -40,7 +40,15 @@ namespace Classic.Windows
 
         private void dgUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // TODO: Kiválasztott felhasználó betöltése a beviteli mezőkbe
+            User? selectedUser = dgUsers.SelectedItem as User;
+            if (selectedUser != null)
+            {
+                tbxName.Text = selectedUser.Name;
+                tbxAge.Text = selectedUser.Age.ToString();
+                cbxRole.Text = selectedUser.Role;
+                tbxIdentityCardNumber.Text = selectedUser.IdentityCardNumber;
+                tbxPassword.Text = selectedUser.Password;
+            }
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -89,17 +97,57 @@ namespace Classic.Windows
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Kiválasztott felhasználó módosítása (Update)
+            User? user = dgUsers.SelectedItem as User;
+            if (user != null)
+            {
+                User updatedUser = new User
+                {
+                    Id = user.Id,
+                    Name = tbxName.Text,
+                    Age = int.Parse(tbxAge.Text),
+                    Role = cbxRole.Text,
+                    IdentityCardNumber = tbxIdentityCardNumber.Text,
+                    Password = tbxPassword.Text
+                };
+                if (updatedUser != null)
+                {
+                    if (userServices.ModifyUser(updatedUser))
+                    {
+                        LoadUsers();
+                        CleanInputFields();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nincs kiválasztott felhasználó a módosításhoz!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Kiválasztott felhasználó törlése (Delete)
+            User? user = dgUsers.SelectedItem as User;
+            if (user != null)
+            {
+                if (MessageBox.Show($"Biztosan törölni szeretné a felhasználót: {user.Name}?", "Megerősítés", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    if (userServices.DeleteUser(user.Id))
+                    {
+                        LoadUsers();
+                        CleanInputFields();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nincs kiválasztott felhasználó a törléshez!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Mezők alaphelyzetbe állítása vagy ablak bezárása
+            CleanInputFields();
+            dgUsers.SelectedItem = null;
         }
     }
 }
