@@ -5,8 +5,68 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Classic.Windows"
         mc:Ignorable="d"
+        Background="AliceBlue"
         Title="Felhasználók" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="7.5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Felső szekció: Felhasználó adatai (Bisque fejléc, mint a mintában) -->
+        <Label Content="Felhasználó adatai" Margin="5,3,5,0" 
+               Height="25" Grid.Row="0" Grid.Column="0" 
+               Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" Background="Bisque"/>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Margin="5,30,5,0" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="0,2">
+                <ComboBox x:Name="cbxRole" Margin="5,0,5,0" Width="130" 
+                          VerticalAlignment="Center" FontSize="15" FontWeight="Bold">
+                    <ComboBoxItem Content="Szerepkör" IsSelected="True"/>
+                    <ComboBoxItem Content="admin"/>
+                    <ComboBoxItem Content="user"/>
+                </ComboBox>
+                <Label Content="Név:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
+                <TextBox x:Name="tbxName" Width="260" Margin="5,0,5,0" VerticalContentAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                <Label Content="Életkor:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
+                <TextBox x:Name="tbxAge" Width="60" Margin="5,0,5,0" VerticalContentAlignment="Center" FontSize="15" FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                <Label Content="Id:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
+                <TextBox x:Name="tbxId" Width="55" Margin="5,0,10,0" VerticalContentAlignment="Center" FontSize="15" IsReadOnly="True" Background="LightGray"/>
+
+                <Label Content="Személyi ig. szám:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
+                <TextBox x:Name="tbxIdentityCardNumber" Width="160" Margin="5,0,10,0" VerticalContentAlignment="Center" FontSize="15"/>
+
+                <Label Content="Jelszó:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
+                <TextBox x:Name="tbxPassword" Width="160" Margin="5,0,5,0" VerticalContentAlignment="Center" FontSize="15"/>
+            </StackPanel>
+        </StackPanel>
+        <Label Content="Felhasználók listája" Margin="5,3,5,0" 
+               Height="25" Grid.Row="1" Grid.Column="0" 
+               Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" Background="DarkOliveGreen" Foreground="White"/>
+        <DataGrid x:Name="dgUsers" Grid.Row="1" Grid.ColumnSpan="2" Margin="5,32,5,5"
+                  AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectionMode="Single" SelectionChanged="dgUsers_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Név" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Életkor" Binding="{Binding Age}" Width="70"/>
+                <DataGridTextColumn Header="Szerepkör" Binding="{Binding Role}" Width="110"/>
+                <DataGridTextColumn Header="Személyi ig. szám" Binding="{Binding IdentityCardNumber}" Width="150"/>
+                <DataGridTextColumn Header="Jelszó" Binding="{Binding Password}" Width="130"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="2">
+            <Button x:Name="btnAdd" Margin="5" VerticalAlignment="Center" Width="100" Content="Hozzáad" Click="btnAdd_Click"/>
+            <Button x:Name="btnUpdate" Margin="5" VerticalAlignment="Center" Width="100" Content="Módosít" Click="btnUpdate_Click"/>
+            <Button x:Name="btnDelete" Margin="5" VerticalAlignment="Center" Width="100" Content="Töröl" Click="btnDelete_Click"/>
+            <Button x:Name="btnCancel" Margin="5" VerticalAlignment="Center" Width="100" Content="Mégsem" Click="btnCancel_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

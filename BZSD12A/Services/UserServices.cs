@@ -60,19 +60,15 @@ namespace BZSD12A.Services
             try
             {
                 string hashedPassword = PasswordEncrypter.HashPassword(newUser.Password);
-
                 string sql = @"INSERT INTO user (Name, Age, Role, IdentityCardNum, Password) 
                                VALUES (@Name, @Age, @Role, @IdCard, @Password)";
-
                 MySqlCommand cmd = new MySqlCommand(sql, _conn);
                 cmd.Parameters.AddWithValue("@Name", newUser.Name);
                 cmd.Parameters.AddWithValue("@Age", newUser.Age);
                 cmd.Parameters.AddWithValue("@Role", newUser.Role);
                 cmd.Parameters.AddWithValue("@IdCard", newUser.IdentityCardNumber);
                 cmd.Parameters.AddWithValue("@Password", hashedPassword);
-
                 if (_conn.State != ConnectionState.Open) _conn.Open();
-
                 int rowsAffected = cmd.ExecuteNonQuery();
                 return rowsAffected > 0;
             }
