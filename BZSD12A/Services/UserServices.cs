@@ -83,42 +83,6 @@ namespace BZSD12A.Services
             }
         }
 
-        public User GetUserById(int userId)
-        {
-            try
-            {
-                string sql = "SELECT * FROM user WHERE ID = @Id";
-                MySqlCommand cmd = new MySqlCommand(sql, _conn);
-                cmd.Parameters.AddWithValue("@Id", userId);
-                if (_conn.State != ConnectionState.Open) _conn.Open();
-                using (MySqlDataReader reader = cmd.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        return new User
-                        {
-                            Id = reader.GetInt32("ID"),
-                            Name = reader.GetString("Name"),
-                            Age = reader.GetInt32("Age"),
-                            Role = reader.GetString("Role"),
-                            IdentityCardNumber = reader.GetString("IdentityCardNum"),
-                            Password = reader.GetString("Password")
-                        };
-                    }
-                }
-                return null; // Nincs ilyen felhasználó
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return null;
-            }
-            finally
-            {
-                if (_conn.State == ConnectionState.Open) _conn.Close();
-            }
-        }
-
         public bool ModifyUser(User modifiedUser)
         {
             try
@@ -130,15 +94,7 @@ namespace BZSD12A.Services
                 cmd.Parameters.AddWithValue("@Age", modifiedUser.Age);
                 cmd.Parameters.AddWithValue("@Role", modifiedUser.Role);
                 cmd.Parameters.AddWithValue("@IdCard", modifiedUser.IdentityCardNumber);
-                if (GetUserById(modifiedUser.Id).Password == PasswordEncrypter.HashPassword(modifiedUser.Password))
-                {
-                    cmd.Parameters.AddWithValue("@Password", modifiedUser.Password);
-                }
-                else
-                {
-                    string hashedPassword = PasswordEncrypter.HashPassword(modifiedUser.Password);
-                    cmd.Parameters.AddWithValue("@Password", hashedPassword);
-                }
+                cmd.Parameters.AddWithValue("@Password", PasswordEncrypter.HashPassword(modifiedUser.Password));
                 cmd.Parameters.AddWithValue("@Id", modifiedUser.Id);
                 if (_conn.State != ConnectionState.Open) _conn.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();

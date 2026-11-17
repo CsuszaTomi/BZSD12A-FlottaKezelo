@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BZSD12A.Services;
 using BZSD12A.Models;
-using BZSD12A.Encryption;
 
 namespace Classic.Windows
 {
@@ -116,10 +115,6 @@ namespace Classic.Windows
                     {
                         LoadUsers();
                         CleanInputFields();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Hiba történt a felhasználó módosításakor!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
