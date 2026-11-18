@@ -32,6 +32,8 @@ namespace Classic
 
         private void AutokCRUD(object sender, RoutedEventArgs e)
         {
+            Autok autok = new Autok();
+            autok.Show();
         }
 
         private void UsersCrud(object sender, RoutedEventArgs e)
