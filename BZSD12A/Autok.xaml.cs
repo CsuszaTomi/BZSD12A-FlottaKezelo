@@ -15,8 +15,6 @@ using System.Windows.Shapes;
 using BZSD12A.Models;
 using BZSD12A.Services;
 using System.Globalization;
-using System.Windows;
-using System.Windows.Controls;
 using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 
 namespace Classic.Windows
@@ -53,7 +51,6 @@ namespace Classic.Windows
             dgCars.ItemsSource = cars;
         }
 
-        // Gyártó váltásakor csak az adott gyártó modelljeit mutatjuk
         private void cbxBrand_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbxBrand.SelectedItem is Brand brand)
@@ -70,10 +67,10 @@ namespace Classic.Windows
             tbxPlate.Text = car.PlateNumber;
             tbxChassis.Text = car.ChassisNumber;
             dpCarYear.SelectedDate = car.CarYear;
-            cbxBrand.SelectedValue = car.BrandId;   // ez betölti a modelleket is
+            cbxBrand.SelectedValue = car.BrandId;
             cbxModel.SelectedValue = car.ModelId;
             cbxUser.SelectedValue = car.UserId;
-            tbxConsumption.Text = car.Consumption.Split(' ')[0];   // "5.4 l/100km" -> "5.4"
+            tbxConsumption.Text = car.Consumption.Split(' ')[0];
             tbxKm.Text = car.RanKm;
             cbxFuel.SelectedItem = car.FuelType;
         }

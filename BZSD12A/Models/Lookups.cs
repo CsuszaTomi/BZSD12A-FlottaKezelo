@@ -16,7 +16,7 @@ using System.Threading.Tasks;
         {
             public int Id { get; set; }
             public string ModelName { get; set; } = string.Empty;
-            public string ModelMaker { get; set; } = string.Empty;   // a gyártó neve (manufacturers.BrandName)
+            public string ModelMaker { get; set; } = string.Empty;
         }
 
         internal class UserLookup
