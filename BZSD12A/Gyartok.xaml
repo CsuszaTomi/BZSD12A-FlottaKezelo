@@ -1,0 +1,49 @@
+﻿<Window x:Class="Classic.Windows.Gyartok"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:local="clr-namespace:Classic.Windows"
+      mc:Ignorable="d"
+      Background="AliceBlue"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Gyártók">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Gyártó adatai" Margin="5,3,5,0" 
+               Height="25" Grid.Row="0" Grid.Column="0" 
+               Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" Background="Bisque"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2" Margin="5,30,5,0" VerticalAlignment="Center">
+            <Label Content="ID:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
+            <TextBox x:Name="tbxId" Width="60" Margin="5,0,15,0" VerticalContentAlignment="Center" FontSize="15" IsReadOnly="True" Background="LightGray"/>
+            <Label Content="Márkanév:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
+            <TextBox x:Name="tbxBrandName" Width="300" MaxLength="32" Margin="5,0,5,0" VerticalContentAlignment="Center" FontSize="15" FontWeight="Bold"/>
+        </StackPanel>
+        <Label Content="Gyártók listája" Margin="5,3,5,0" 
+               Height="25" Grid.Row="1" Grid.Column="0" 
+               Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" Background="DarkOliveGreen" Foreground="White"/>
+        <DataGrid x:Name="dgManufacturers" Grid.Row="1" Grid.ColumnSpan="2" Margin="5,32,5,5"
+                  AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectionMode="Single" SelectionChanged="dgManufacturers_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="80"/>
+                <DataGridTextColumn Header="Márkanév" Binding="{Binding BrandName}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="2">
+            <Button x:Name="btnAdd" Margin="5" VerticalAlignment="Center" Width="100" Content="Hozzáad" Click="btnAdd_Click"/>
+            <Button x:Name="btnUpdate" Margin="5" VerticalAlignment="Center" Width="100" Content="Módosít" Click="btnUpdate_Click"/>
+            <Button x:Name="btnDelete" Margin="5" VerticalAlignment="Center" Width="100" Content="Töröl" Click="btnDelete_Click"/>
+            <Button x:Name="btnCancel" Margin="5" VerticalAlignment="Center" Width="100" Content="Mégsem" Click="btnCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

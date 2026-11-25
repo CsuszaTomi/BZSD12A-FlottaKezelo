@@ -46,6 +46,71 @@ namespace BZSD12A.Services
             return list;
         }
 
+        public bool AddBrand(string newBrandName)
+        {
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO manufacturers (BrandName) VALUES (@BrandName)", _conn);
+                cmd.Parameters.AddWithValue("@BrandName", newBrandName);
+                if (_conn.State != ConnectionState.Open) _conn.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            finally
+            {
+                if (_conn.State == ConnectionState.Open) _conn.Close();
+            }
+        }
+
+        public bool UpdateBrand(int brandId, string newBrandName)
+        {
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("UPDATE manufacturers SET BrandName = @BrandName WHERE ID = @BrandId", _conn);
+                cmd.Parameters.AddWithValue("@BrandName", newBrandName);
+                cmd.Parameters.AddWithValue("@BrandId", brandId);
+                if (_conn.State != ConnectionState.Open) _conn.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            finally
+            {
+                if (_conn.State == ConnectionState.Open) _conn.Close();
+            }
+        }
+
+        public bool DeleteBrand(Brand brand)
+        {
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("DELETE FROM `manufacturers` WHERE ID = @BrandId AND BrandName = @BrandName", _conn);
+                cmd.Parameters.AddWithValue("@BrandName", brand.BrandName);
+                cmd.Parameters.AddWithValue("@BrandId", brand.Id);
+                if (_conn.State != ConnectionState.Open) _conn.Open();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            finally
+            {
+                if (_conn.State == ConnectionState.Open) _conn.Close();
+            }
+        }
+
         public List<CarModel> GetModelsByBrand(string brandName)
         {
             List<CarModel> list = new List<CarModel>();

@@ -41,5 +41,11 @@ namespace Classic
             Felhasznalok felhasznalok = new Felhasznalok();
             felhasznalok.Show();
         }
+
+        private void BrandsCrud(object sender, RoutedEventArgs e)
+        {
+            Gyartok gyartok = new Gyartok();
+            gyartok.Show();
+        }
     }
 }
