@@ -18,20 +18,19 @@ namespace BZSD12A.Services
             _conn = conn;
         }
 
-        public void GetMaintenance()
+        public List<Maintenance> GetMaintenance()
         {
+            List<Maintenance> maintenance = new List<Maintenance>();
             try
             {
-                List<Maintenance> maintenance = new List<Maintenance>();
-                string command = "SELECT * FROM maintenance";
-                using (MySqlCommand cmd = new MySqlCommand(command, _conn))
+                using (MySqlCommand cmd = new MySqlCommand("SELECT * FROM maintenance", _conn))
                 {
                     _conn.Open();
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            Maintenance maintenance1 = new Maintenance
+                            maintenance.Add(new Maintenance
                             {
                                 Id = reader.GetInt32("ID"),
                                 CarID = Convert.ToInt32(reader.GetString("CarID")),
@@ -39,18 +38,15 @@ namespace BZSD12A.Services
                                 Description = reader.GetString("Description"),
                                 Cost = reader.GetInt32("Cost"),
                                 RanKm = Convert.ToInt32(reader.GetString("RanKm"))
-                            };
-                            maintenance.Add(maintenance1);
+                            });
                         }
-
                     }
-                    _conn.Close();
                 }
+                return maintenance;
             }
-            catch (Exception ex)
+            finally
             {
-                Console.WriteLine(ex);
-                throw;
+                if (_conn.State == System.Data.ConnectionState.Open) _conn.Close();
             }
         }
 
