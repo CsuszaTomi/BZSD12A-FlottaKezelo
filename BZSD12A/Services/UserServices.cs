@@ -83,6 +83,42 @@ namespace BZSD12A.Services
             }
         }
 
+        public User GetUserById(int id)
+        {
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM user WHERE Id = @Id");
+                cmd.Parameters.AddWithValue("@Id", id);
+                if (_conn.State != ConnectionState.Open) _conn.Open();
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        User user = new User
+                        {
+                            Id = reader.GetInt32("ID"),
+                            Name = reader.GetString("Name"),
+                            Age = reader.GetInt32("Age"),
+                            Role = reader.GetString("Role"),
+                            IdentityCardNumber = reader.GetString("IdentityCardNum"),
+                            Password = reader.GetString("Password")
+                        };
+                        return user;
+                    }
+                }
+                return null;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+            finally
+            {
+                if (_conn.State == ConnectionState.Open) _conn.Close();
+            }
+        }
+
         public bool ModifyUser(User modifiedUser)
         {
             try
@@ -94,7 +130,15 @@ namespace BZSD12A.Services
                 cmd.Parameters.AddWithValue("@Age", modifiedUser.Age);
                 cmd.Parameters.AddWithValue("@Role", modifiedUser.Role);
                 cmd.Parameters.AddWithValue("@IdCard", modifiedUser.IdentityCardNumber);
-                cmd.Parameters.AddWithValue("@Password", PasswordEncrypter.HashPassword(modifiedUser.Password));
+                if (_conn.State != ConnectionState.Open) _conn.Open();
+                if (!(GetUserById(modifiedUser.Id).Password == modifiedUser.Password))
+                {
+                    cmd.Parameters.AddWithValue("@Password", PasswordEncrypter.HashPassword(modifiedUser.Password));
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@Password", modifiedUser.Password);
+                }
                 cmd.Parameters.AddWithValue("@Id", modifiedUser.Id);
                 if (_conn.State != ConnectionState.Open) _conn.Open();
                 int rowsAffected = cmd.ExecuteNonQuery();
