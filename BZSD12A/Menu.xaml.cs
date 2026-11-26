@@ -42,6 +42,12 @@ namespace Classic
             felhasznalok.Show();
         }
 
+        private void MaintanenceCRUD(object sender, RoutedEventArgs e)
+        {
+            Maintenance karbantartás = new Maintenance();
+            karbantartás.Show();
+        }
+
         private void BrandsCrud(object sender, RoutedEventArgs e)
         {
             Gyartok gyartok = new Gyartok();

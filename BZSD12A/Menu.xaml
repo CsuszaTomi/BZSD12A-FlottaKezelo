@@ -26,6 +26,7 @@
                 </MenuItem>
                 <MenuItem Header="_Autók Kezelése">
                     <MenuItem Header="Autók adatai" Click="AutokCRUD"/>
+                    <MenuItem Header="Karbantartások adatai" Click="MaintanenceCRUD"/>
                     <MenuItem Header="Gyártók adatai" Click="BrandsCrud"/>
                 </MenuItem>
                 <MenuItem Header="_Alkamazottak kezelése">

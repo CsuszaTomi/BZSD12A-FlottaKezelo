@@ -33,11 +33,11 @@ namespace BZSD12A.Services
                             maintenance.Add(new Maintenance
                             {
                                 Id = reader.GetInt32("ID"),
-                                CarID = Convert.ToInt32(reader.GetString("CarID")),
+                                CarID = reader.GetInt32("CarID"),
                                 ServiceDate = reader.GetDateTime("ServiceDate"),
                                 Description = reader.GetString("Description"),
                                 Cost = reader.GetInt32("Cost"),
-                                RanKm = Convert.ToInt32(reader.GetString("RanKm"))
+                                RanKm = reader.GetInt32("RanKm")
                             });
                         }
                     }
