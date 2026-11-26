@@ -1,13 +1,13 @@
 ﻿<Window x:Class="Classic.Windows.Maintenance"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:local="clr-namespace:Classic.Windows"
-      mc:Ignorable="d"
-      Background="AliceBlue"
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Karbantartás">
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Classic.Windows"
+        mc:Ignorable="d"
+        Background="AliceBlue"
+        d:DesignHeight="450" d:DesignWidth="800"
+        Title="Karbantartás">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -15,53 +15,44 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="7*"/>
+            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="7.5*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-
-        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Margin="5,0,5,0" VerticalAlignment="Center">
-            <Grid HorizontalAlignment="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Label Content="Karbantartás adatai" Margin="5,0,5,0" 
-                   Height="25" Grid.Row="0" Grid.Column="0" 
-                   Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" Background="Bisque"/>
-                <StackPanel Orientation="Horizontal" Grid.Row="1">
-                    <Label Content="ID:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
-                    <TextBox x:Name="tbxId" Width="60" Margin="5,0,15,0" VerticalContentAlignment="Center" FontSize="15" IsReadOnly="True" Background="LightGray"/>
-                    <Label Content="Autó Azonosító:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
-                    <TextBox x:Name="tbxCarID" Width="53" Margin="5,0,5,0" VerticalContentAlignment="Center" FontSize="15" FontWeight="Bold"/>
-                    <Label Content="Szervíz időpont:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
-                    <TextBox x:Name="tbxServiceDate" Width="100" Margin="5,0,5,0" VerticalContentAlignment="Center" FontSize="15" FontWeight="Bold"/>
-                    <Label Content="Futott Kilóméter:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
-                    <TextBox x:Name="tbxServiceKm" Width="100" Margin="5,0,5,0" VerticalContentAlignment="Center" FontSize="15" FontWeight="Bold"/>
-
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Grid.Row="2">
-                    <Label Content="Szervíz leírás:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
-                    <TextBox x:Name="tbxServiceDescription" Width="400" Margin="5,0,5,0" VerticalContentAlignment="Center" FontSize="15" FontWeight="Bold"/>
-                    <Label Content="Szervíz költség:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
-                    <TextBox x:Name="tbxServiceCost" Width="100" Margin="5,0,5,0" VerticalContentAlignment="Center" FontSize="15" FontWeight="Bold"/>
-                </StackPanel>
-            </Grid>
+        <Label Content="Karbantartás adatai" Margin="5,3,5,0" 
+               Height="25" Grid.Row="0" Grid.Column="0" 
+               Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" Background="Bisque"/>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Margin="5,30,5,0" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="0,2">
+                <Label Content="ID:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
+                <TextBox x:Name="tbxId" Width="60" Margin="5,0,10,0" VerticalContentAlignment="Center" FontSize="15" IsReadOnly="True" Background="LightGray"/>
+                <Label Content="Autó Azonosító:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
+                <TextBox x:Name="tbxCarID" Width="60" Margin="5,0,10,0" VerticalContentAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                <Label Content="Szerviz időpont:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
+                <TextBox x:Name="tbxServiceDate" Width="110" Margin="5,0,10,0" VerticalContentAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                <Label Content="Futott kilométer:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
+                <TextBox x:Name="tbxServiceKm" Width="100" Margin="5,0,5,0" VerticalContentAlignment="Center" FontSize="15" FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                <Label Content="Szerviz leírás:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
+                <TextBox x:Name="tbxServiceDescription" Width="390" Margin="5,0,15,0" VerticalContentAlignment="Center" FontSize="15" FontWeight="Bold"/>
+                <Label Content="Szerviz költség:" Margin="5,0,0,0" VerticalContentAlignment="Center" FontSize="15"/>
+                <TextBox x:Name="tbxServiceCost" Width="110" Margin="5,0,5,0" VerticalContentAlignment="Center" FontSize="15" FontWeight="Bold"/>
+            </StackPanel>
         </StackPanel>
         <Label Content="Karbantartás listája" Margin="5,3,5,0" 
                Height="25" Grid.Row="1" Grid.Column="0" 
                Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalContentAlignment="Center" Background="DarkOliveGreen" Foreground="White"/>
         <DataGrid x:Name="dgMaintenanceRecords" Grid.Row="1" Grid.ColumnSpan="2" Margin="5,32,5,5"
-          AutoGenerateColumns="False" IsReadOnly="True"
-          SelectionMode="Single" SelectionChanged="dgMaintenanceRecords_SelectionChanged">
+                  AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectionMode="Single" SelectionChanged="dgMaintenanceRecords_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*"/>
-                <DataGridTextColumn Header="Autó ID" Binding="{Binding CarID}" Width="*"/>
-                <DataGridTextColumn Header="Dátum" Binding="{Binding ServiceDate, StringFormat=yyyy.MM.dd}" Width="*"/>
-                <DataGridTextColumn Header="Km" Binding="{Binding RanKm}" Width="*"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Autó ID" Binding="{Binding CarID}" Width="75"/>
+                <DataGridTextColumn Header="Dátum" Binding="{Binding ServiceDate, StringFormat=yyyy.MM.dd}" Width="105"/>
+                <DataGridTextColumn Header="Km" Binding="{Binding RanKm}" Width="90"/>
                 <DataGridTextColumn Header="Leírás" Binding="{Binding Description}" Width="*"/>
-                <DataGridTextColumn Header="Költség" Binding="{Binding Cost}" Width="*"/>
+                <DataGridTextColumn Header="Költség" Binding="{Binding Cost}" Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="2">

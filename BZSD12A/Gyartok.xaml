@@ -35,7 +35,7 @@
                   AutoGenerateColumns="False" IsReadOnly="True"
                   SelectionMode="Single" SelectionChanged="dgManufacturers_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="80"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="80"/>
                 <DataGridTextColumn Header="Márkanév" Binding="{Binding BrandName}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
